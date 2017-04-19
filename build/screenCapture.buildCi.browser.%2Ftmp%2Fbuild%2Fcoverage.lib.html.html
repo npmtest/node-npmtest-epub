@@ -1,0 +1,2482 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-epub/node_modules/epub/epub.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-epub">npmtest-epub (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-epub/node_modules/epub/epub.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">7.14% <small>(24 / 336)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 276)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 41)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">7.14% <small>(24 / 336)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> » <a href="index.html">node-npmtest-epub/node_modules/epub/</a> » epub.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var XML2JS = require("xml2js").Parser;
+var util = require('util');
+var EventEmitter = require('events').EventEmitter;
+&nbsp;
+try {
+    // zipfile is an optional dependency:
+    var ZipFile = require("zipfile").ZipFile;
+} catch (err) {
+    // Mock zipfile using pure-JS adm-zip:
+<span class="cstat-no" title="statement not covered">    var AdmZip = require('adm-zip');</span>
+    
+<span class="cstat-no" title="statement not covered">    var ZipFile = <span class="fstat-no" title="function not covered">function(filename) {</span></span>
+<span class="cstat-no" title="statement not covered">        this.admZip = new AdmZip(filename);</span>
+<span class="cstat-no" title="statement not covered">        this.names = this.admZip.getEntries().map(<span class="fstat-no" title="function not covered">function(zipEntry) {</span></span>
+<span class="cstat-no" title="statement not covered">            return zipEntry.entryName;</span>
+        });
+<span class="cstat-no" title="statement not covered">        this.count = this.names.length;</span>
+    };
+<span class="cstat-no" title="statement not covered">    ZipFile.prototype.readFile = <span class="fstat-no" title="function not covered">function(name, cb) {</span></span>
+<span class="cstat-no" title="statement not covered">        this.admZip.readFileAsync(this.admZip.getEntry(name), <span class="fstat-no" title="function not covered">function(buffer, error) {</span></span>
+            // `error` is bogus right now, so let's just drop it.
+            // see https://github.com/cthackers/adm-zip/pull/88
+<span class="cstat-no" title="statement not covered">            return cb(null, buffer);</span>
+        });
+    };
+}
+&nbsp;
+//TODO: Cache parsed data
+&nbsp;
+/**
+ *  new EPub(fname[, imageroot][, linkroot])
+ *  - fname (String): filename for the ebook
+ *  - imageroot (String): URL prefix for images
+ *  - linkroot (String): URL prefix for links
+ *
+ *  Creates an Event Emitter type object for parsing epub files
+ *
+ *      var epub = new EPub("book.epub");
+ *      epub.on("end", function () {
+ *           console.log(epub.spine);
+ *      });
+ *      epub.on("error", function (error) { ... });
+ *      epub.parse();
+ *
+ *  Image and link URL format is:
+ *
+ *      imageroot + img_id + img_zip_path
+ *
+ *  So an image "logo.jpg" which resides in "OPT/" in the zip archive
+ *  and is listed in the manifest with id "logo_img" will have the
+ *  following url (providing that imageroot is "/images/"):
+ *
+ *      /images/logo_img/OPT/logo.jpg
+ **/
+<span class="fstat-no" title="function not covered">function EPub(fname, imageroot, linkroot) {</span>
+<span class="cstat-no" title="statement not covered">    EventEmitter.call(this);</span>
+<span class="cstat-no" title="statement not covered">    this.filename = fname;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    this.imageroot = (imageroot || "/images/").trim();</span>
+<span class="cstat-no" title="statement not covered">    this.linkroot = (linkroot || "/links/").trim();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (this.imageroot.substr(-1) != "/") {</span>
+<span class="cstat-no" title="statement not covered">        this.imageroot += "/";</span>
+    }
+<span class="cstat-no" title="statement not covered">    if (this.linkroot.substr(-1) != "/") {</span>
+<span class="cstat-no" title="statement not covered">        this.linkroot += "/";</span>
+    }
+}
+util.inherits(EPub, EventEmitter);
+&nbsp;
+/**
+ *  EPub#parse() -&gt; undefined
+ *
+ *  Starts the parser, needs to be called by the script
+ **/
+EPub.prototype.parse = <span class="fstat-no" title="function not covered">function () {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    this.containerFile = false;</span>
+<span class="cstat-no" title="statement not covered">    this.mimeFile = false;</span>
+<span class="cstat-no" title="statement not covered">    this.rootFile = false;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    this.metadata = {};</span>
+<span class="cstat-no" title="statement not covered">    this.manifest = {};</span>
+<span class="cstat-no" title="statement not covered">    this.spine    = {toc: false, contents: []};</span>
+<span class="cstat-no" title="statement not covered">    this.flow = [];</span>
+<span class="cstat-no" title="statement not covered">    this.toc = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    this.open();</span>
+};
+&nbsp;
+/**
+ *  EPub#open() -&gt; undefined
+ *
+ *  Opens the epub file with Zip unpacker, retrieves file listing
+ *  and runs mime type check
+ **/
+EPub.prototype.open = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">    try&nbsp;{</span>
+<span class="cstat-no" title="statement not covered">        this.zip = new ZipFile(this.filename);</span>
+    } catch (E) {
+<span class="cstat-no" title="statement not covered">        this.emit("error", new Error("Invalid/missing file"));</span>
+<span class="cstat-no" title="statement not covered">        return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (!this.zip.names || !this.zip.names.length) {</span>
+<span class="cstat-no" title="statement not covered">        this.emit("error", new Error("No files in archive"));</span>
+<span class="cstat-no" title="statement not covered">        return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    this.checkMimeType();</span>
+};
+&nbsp;
+/**
+ *  EPub#checkMimeType() -&gt; undefined
+ *
+ *  Checks if there's a file called "mimetype" and that it's contents
+ *  are "application/epub+zip". On success runs root file check.
+ **/
+EPub.prototype.checkMimeType = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">    var i, len;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    for (i = 0, len = this.zip.names.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">        if (this.zip.names[i].toLowerCase() == "mimetype") {</span>
+<span class="cstat-no" title="statement not covered">            this.mimeFile = this.zip.names[i];</span>
+<span class="cstat-no" title="statement not covered">            break;</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered">    if (!this.mimeFile) {</span>
+<span class="cstat-no" title="statement not covered">        this.emit("error", new Error("No mimetype file in archive"));</span>
+<span class="cstat-no" title="statement not covered">        return;</span>
+    }
+<span class="cstat-no" title="statement not covered">    this.zip.readFile(this.mimeFile, (<span class="fstat-no" title="function not covered">function (err, data) {</span></span>
+<span class="cstat-no" title="statement not covered">        if (err) {</span>
+<span class="cstat-no" title="statement not covered">            this.emit("error", new Error("Reading archive failed"));</span>
+<span class="cstat-no" title="statement not covered">            return;</span>
+        }
+<span class="cstat-no" title="statement not covered">        var txt = data.toString("utf-8").toLowerCase().trim();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if (txt  !=  "application/epub+zip") {</span>
+<span class="cstat-no" title="statement not covered">            this.emit("error", new Error("Unsupported mime type"));</span>
+<span class="cstat-no" title="statement not covered">            return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        this.getRootFiles();</span>
+    }).bind(this));
+};
+&nbsp;
+/**
+ *  EPub#getRootFiles() -&gt; undefined
+ *
+ *  Looks for a "meta-inf/container.xml" file and searches for a
+ *  rootfile element with mime type "application/oebps-package+xml".
+ *  On success calls the rootfile parser
+ **/
+EPub.prototype.getRootFiles = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">    var i, len;</span>
+<span class="cstat-no" title="statement not covered">    for (i = 0, len = this.zip.names.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">        if (this.zip.names[i].toLowerCase() == "meta-inf/container.xml") {</span>
+<span class="cstat-no" title="statement not covered">            this.containerFile = this.zip.names[i];</span>
+<span class="cstat-no" title="statement not covered">            break;</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered">    if (!this.containerFile) {</span>
+<span class="cstat-no" title="statement not covered">        this.emit("error", new Error("No container file in archive"));</span>
+<span class="cstat-no" title="statement not covered">        return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    this.zip.readFile(this.containerFile, (<span class="fstat-no" title="function not covered">function (err, data) {</span></span>
+<span class="cstat-no" title="statement not covered">        if (err) {</span>
+<span class="cstat-no" title="statement not covered">            this.emit("error", new Error("Reading archive failed"));</span>
+<span class="cstat-no" title="statement not covered">            return;</span>
+        }
+<span class="cstat-no" title="statement not covered">        var xml = data.toString("utf-8").toLowerCase().trim(),</span>
+            xmlparser = new XML2JS();
+&nbsp;
+<span class="cstat-no" title="statement not covered">        xmlparser.on("end", (<span class="fstat-no" title="function not covered">function (result) {</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (!result.rootfiles || !result.rootfiles.rootfile) {</span>
+<span class="cstat-no" title="statement not covered">                this.emit("error", new Error("No rootfiles found"));</span>
+<span class="cstat-no" title="statement not covered">                return;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered">            var rootfile = result.rootfiles.rootfile,</span>
+                filename = false, i, len;
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (Array.isArray(rootfile)) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">                for (i = 0, len = rootfile.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">                    if (rootfile[i]["@"]["media-type"] &amp;&amp;</span>
+                            rootfile[i]["@"]["media-type"] == "application/oebps-package+xml" &amp;&amp;
+                            rootfile[i]["@"]["full-path"]) {
+<span class="cstat-no" title="statement not covered">                        filename = rootfile[i]["@"]["full-path"].toLowerCase().trim();</span>
+<span class="cstat-no" title="statement not covered">                        break;</span>
+                    }
+                }
+&nbsp;
+            } else <span class="cstat-no" title="statement not covered">if (rootfile["@"]) {</span>
+<span class="cstat-no" title="statement not covered">                if (rootfile["@"]["media-type"]  !=  "application/oebps-package+xml" || !rootfile["@"]["full-path"]) {</span>
+<span class="cstat-no" title="statement not covered">                    this.emit("error", new Error("Rootfile in unknown format"));</span>
+<span class="cstat-no" title="statement not covered">                    return;</span>
+                }
+<span class="cstat-no" title="statement not covered">                filename = rootfile["@"]["full-path"].toLowerCase().trim();</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (!filename) {</span>
+<span class="cstat-no" title="statement not covered">                this.emit("error", new Error("Empty rootfile"));</span>
+<span class="cstat-no" title="statement not covered">                return;</span>
+            }
+&nbsp;
+&nbsp;
+<span class="cstat-no" title="statement not covered">            for (i = 0, len = this.zip.names.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">                if (this.zip.names[i].toLowerCase() == filename) {</span>
+<span class="cstat-no" title="statement not covered">                    this.rootFile = this.zip.names[i];</span>
+<span class="cstat-no" title="statement not covered">                    break;</span>
+                }
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (!this.rootFile) {</span>
+<span class="cstat-no" title="statement not covered">                this.emit("error", new Error("Rootfile not found from archive"));</span>
+<span class="cstat-no" title="statement not covered">                return;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered">            this.handleRootFile();</span>
+&nbsp;
+        }).bind(this));
+&nbsp;
+<span class="cstat-no" title="statement not covered">        xmlparser.on("error", (<span class="fstat-no" title="function not covered">function (err) {</span></span>
+<span class="cstat-no" title="statement not covered">            this.emit("error", new Error("Parsing container XML failed"));</span>
+<span class="cstat-no" title="statement not covered">            return;</span>
+        }).bind(this));
+&nbsp;
+<span class="cstat-no" title="statement not covered">        xmlparser.parseString(xml);</span>
+&nbsp;
+&nbsp;
+    }).bind(this));
+};
+&nbsp;
+/**
+ *  EPub#handleRootFile() -&gt; undefined
+ *
+ *  Parses the rootfile XML and calls rootfile parser
+ **/
+EPub.prototype.handleRootFile = <span class="fstat-no" title="function not covered">function () {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    this.zip.readFile(this.rootFile, (<span class="fstat-no" title="function not covered">function (err, data) {</span></span>
+<span class="cstat-no" title="statement not covered">        if (err) {</span>
+<span class="cstat-no" title="statement not covered">            this.emit("error", new Error("Reading archive failed"));</span>
+<span class="cstat-no" title="statement not covered">            return;</span>
+        }
+<span class="cstat-no" title="statement not covered">        var xml = data.toString("utf-8"),</span>
+            xmlparser = new XML2JS();
+&nbsp;
+<span class="cstat-no" title="statement not covered">        xmlparser.on("end", this.parseRootFile.bind(this));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        xmlparser.on("error", (<span class="fstat-no" title="function not covered">function (err) {</span></span>
+<span class="cstat-no" title="statement not covered">            this.emit("error", new Error("Parsing container XML failed"));</span>
+<span class="cstat-no" title="statement not covered">            return;</span>
+        }).bind(this));
+&nbsp;
+<span class="cstat-no" title="statement not covered">        xmlparser.parseString(xml);</span>
+&nbsp;
+    }).bind(this));
+};
+&nbsp;
+/**
+ *  EPub#parseRootFile() -&gt; undefined
+ *
+ *  Parses elements "metadata," "manifest," "spine" and TOC.
+ *  Emits "end" if no TOC
+ **/
+EPub.prototype.parseRootFile = <span class="fstat-no" title="function not covered">function (rootfile) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    this.version = rootfile['@'].version || '2.0';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var i, len, keys, keyparts, key;</span>
+<span class="cstat-no" title="statement not covered">    keys = Object.keys(rootfile);</span>
+<span class="cstat-no" title="statement not covered">    for (i = 0, len = keys.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">        keyparts = keys[i].split(":");</span>
+<span class="cstat-no" title="statement not covered">        key = (keyparts.pop() || "").toLowerCase().trim();</span>
+<span class="cstat-no" title="statement not covered">        switch (key) {</span>
+        case "metadata":
+<span class="cstat-no" title="statement not covered">            this.parseMetadata(rootfile[keys[i]]);</span>
+<span class="cstat-no" title="statement not covered">            break;</span>
+        case "manifest":
+<span class="cstat-no" title="statement not covered">            this.parseManifest(rootfile[keys[i]]);</span>
+<span class="cstat-no" title="statement not covered">            break;</span>
+        case "spine":
+<span class="cstat-no" title="statement not covered">            this.parseSpine(rootfile[keys[i]]);</span>
+<span class="cstat-no" title="statement not covered">            break;</span>
+        case "guide":
+            //this.parseGuide(rootfile[keys[i]]);
+<span class="cstat-no" title="statement not covered">            break;</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (this.spine.toc) {</span>
+<span class="cstat-no" title="statement not covered">        this.parseTOC();</span>
+    } else {
+<span class="cstat-no" title="statement not covered">        this.emit("end");</span>
+    }
+};
+&nbsp;
+/**
+ *  EPub#parseMetadata() -&gt; undefined
+ *
+ *  Parses "metadata" block (book metadata, title, author etc.)
+ **/
+EPub.prototype.parseMetadata = <span class="fstat-no" title="function not covered">function (metadata) {</span>
+<span class="cstat-no" title="statement not covered">    var i, j, len, keys, keyparts, key;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    keys = Object.keys(metadata);</span>
+<span class="cstat-no" title="statement not covered">    for (i = 0, len = keys.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">        keyparts = keys[i].split(":");</span>
+<span class="cstat-no" title="statement not covered">        key = (keyparts.pop() || "").toLowerCase().trim();</span>
+<span class="cstat-no" title="statement not covered">        switch (key) {</span>
+        case "publisher":
+<span class="cstat-no" title="statement not covered">            if (Array.isArray(metadata[keys[i]])) {</span>
+<span class="cstat-no" title="statement not covered">                this.metadata.publisher = String(metadata[keys[i]][0] &amp;&amp; metadata[keys[i]][0]["#"] || metadata[keys[i]][0] || "").trim();</span>
+            } else {
+<span class="cstat-no" title="statement not covered">                this.metadata.publisher = String(metadata[keys[i]]["#"] || metadata[keys[i]] || "").trim();</span>
+            }
+<span class="cstat-no" title="statement not covered">            break;</span>
+        case "language":
+<span class="cstat-no" title="statement not covered">            if (Array.isArray(metadata[keys[i]])) {</span>
+<span class="cstat-no" title="statement not covered">                this.metadata.language = String(metadata[keys[i]][0] &amp;&amp; metadata[keys[i]][0]["#"] || metadata[keys[i]][0] || "").toLowerCase().trim();</span>
+            } else {
+<span class="cstat-no" title="statement not covered">                this.metadata.language = String(metadata[keys[i]]["#"] || metadata[keys[i]] || "").toLowerCase().trim();</span>
+            }
+<span class="cstat-no" title="statement not covered">            break;</span>
+        case "title":
+<span class="cstat-no" title="statement not covered">            if (Array.isArray(metadata[keys[i]])) {</span>
+<span class="cstat-no" title="statement not covered">                this.metadata.title = String(metadata[keys[i]][0] &amp;&amp; metadata[keys[i]][0]["#"] || metadata[keys[i]][0] || "").trim();</span>
+            } else {
+<span class="cstat-no" title="statement not covered">                this.metadata.title = String(metadata[keys[i]]["#"] || metadata[keys[i]] || "").trim();</span>
+            }
+<span class="cstat-no" title="statement not covered">            break;</span>
+        case "subject":
+<span class="cstat-no" title="statement not covered">            if (Array.isArray(metadata[keys[i]])) {</span>
+<span class="cstat-no" title="statement not covered">                this.metadata.subject = String(metadata[keys[i]][0] &amp;&amp; metadata[keys[i]][0]["#"] || metadata[keys[i]][0] || "").trim();</span>
+            } else {
+<span class="cstat-no" title="statement not covered">                this.metadata.subject = String(metadata[keys[i]]["#"] || metadata[keys[i]] || "").trim();</span>
+            }
+<span class="cstat-no" title="statement not covered">            break;</span>
+        case "description":
+<span class="cstat-no" title="statement not covered">            if (Array.isArray(metadata[keys[i]])) {</span>
+<span class="cstat-no" title="statement not covered">                this.metadata.description = String(metadata[keys[i]][0] &amp;&amp; metadata[keys[i]][0]["#"] || metadata[keys[i]][0] || "").trim();</span>
+            } else {
+<span class="cstat-no" title="statement not covered">                this.metadata.description = String(metadata[keys[i]]["#"] || metadata[keys[i]] || "").trim();</span>
+            }
+<span class="cstat-no" title="statement not covered">            break;</span>
+        case "creator":
+<span class="cstat-no" title="statement not covered">            if (Array.isArray(metadata[keys[i]])) {</span>
+<span class="cstat-no" title="statement not covered">                this.metadata.creator = String(metadata[keys[i]][0] &amp;&amp; metadata[keys[i]][0]["#"] || metadata[keys[i]][0] || "").trim();</span>
+<span class="cstat-no" title="statement not covered">                this.metadata.creatorFileAs = String(metadata[keys[i]][0] &amp;&amp; metadata[keys[i]][0]['@'] &amp;&amp; metadata[keys[i]][0]['@']["opf:file-as"] || this.metadata.creator).trim();</span>
+            } else {
+<span class="cstat-no" title="statement not covered">                this.metadata.creator = String(metadata[keys[i]]["#"] || metadata[keys[i]] || "").trim();</span>
+<span class="cstat-no" title="statement not covered">                this.metadata.creatorFileAs = String(metadata[keys[i]]['@'] &amp;&amp; metadata[keys[i]]['@']["opf:file-as"] || this.metadata.creator).trim();</span>
+            }
+<span class="cstat-no" title="statement not covered">            break;</span>
+        case "date":
+<span class="cstat-no" title="statement not covered">            if (Array.isArray(metadata[keys[i]])) {</span>
+<span class="cstat-no" title="statement not covered">                this.metadata.date = String(metadata[keys[i]][0] &amp;&amp; metadata[keys[i]][0]["#"] || metadata[keys[i]][0] || "").trim();</span>
+            } else {
+<span class="cstat-no" title="statement not covered">                this.metadata.date = String(metadata[keys[i]]["#"] || metadata[keys[i]] || "").trim();</span>
+            }
+<span class="cstat-no" title="statement not covered">            break;</span>
+        case "identifier":
+<span class="cstat-no" title="statement not covered">            if (metadata[keys[i]]["@"] &amp;&amp; metadata[keys[i]]["@"]["opf:scheme"] == "ISBN") {</span>
+<span class="cstat-no" title="statement not covered">                this.metadata.ISBN = String(metadata[keys[i]]["#"] || "").trim();</span>
+            } else <span class="cstat-no" title="statement not covered">if (metadata[keys[i]]["@"] &amp;&amp; metadata[keys[i]]["@"].id &amp;&amp; metadata[keys[i]]["@"].id.match(/uuid/i)) {</span>
+<span class="cstat-no" title="statement not covered">                this.metadata.UUID = String(metadata[keys[i]]["#"] || "").replace('urn:uuid:', '').toUpperCase().trim();</span>
+            } else <span class="cstat-no" title="statement not covered">if (Array.isArray(metadata[keys[i]])) {</span>
+<span class="cstat-no" title="statement not covered">                for (j = 0; j &lt; metadata[keys[i]].length; j++) {</span>
+<span class="cstat-no" title="statement not covered">                    if (metadata[keys[i]][j]["@"]) {</span>
+<span class="cstat-no" title="statement not covered">                        if (metadata[keys[i]][j]["@"]["opf:scheme"] == "ISBN") {</span>
+<span class="cstat-no" title="statement not covered">                            this.metadata.ISBN = String(metadata[keys[i]][j]["#"] || "").trim();</span>
+                        } else <span class="cstat-no" title="statement not covered">if (metadata[keys[i]][j]["@"].id &amp;&amp; metadata[keys[i]][j]["@"].id.match(/uuid/i)) {</span>
+<span class="cstat-no" title="statement not covered">                            this.metadata.UUID = String(metadata[keys[i]][j]["#"] || "").replace('urn:uuid:', '').toUpperCase().trim();</span>
+                        }
+                    }
+                }
+            }
+<span class="cstat-no" title="statement not covered">            break;</span>
+        }
+    }
+    
+<span class="cstat-no" title="statement not covered">    var metas = metadata['meta'] || {};</span>
+<span class="cstat-no" title="statement not covered">    Object.keys(metas).forEach(<span class="fstat-no" title="function not covered">function(key) {</span></span>
+<span class="cstat-no" title="statement not covered">        var meta = metas[key];</span>
+<span class="cstat-no" title="statement not covered">        if (meta['@'] &amp;&amp; meta['@'].name) {</span>
+<span class="cstat-no" title="statement not covered">            var name = meta['@'].name;</span>
+<span class="cstat-no" title="statement not covered">            this.metadata[name] = meta['@'].content;</span>
+        }
+<span class="cstat-no" title="statement not covered">        if (meta['#'] &amp;&amp; meta['@'].property) {</span>
+<span class="cstat-no" title="statement not covered">            this.metadata[meta['@'].property] = meta['#'];</span>
+        }
+    }, this);
+};
+&nbsp;
+/**
+ *  EPub#parseManifest() -&gt; undefined
+ *
+ *  Parses "manifest" block (all items included, html files, images, styles)
+ **/
+EPub.prototype.parseManifest = <span class="fstat-no" title="function not covered">function (manifest) {</span>
+<span class="cstat-no" title="statement not covered">    var i, len, path = this.rootFile.split("/"), element, path_str;</span>
+<span class="cstat-no" title="statement not covered">    path.pop();</span>
+<span class="cstat-no" title="statement not covered">    path_str = path.join("/");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (manifest.item) {</span>
+<span class="cstat-no" title="statement not covered">        for (i = 0, len = manifest.item.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">            if (manifest.item[i]['@']) {</span>
+<span class="cstat-no" title="statement not covered">                element = manifest.item[i]['@'];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">                if (element.href &amp;&amp; element.href.substr(0, path_str.length)  !=  path_str) {</span>
+<span class="cstat-no" title="statement not covered">                    element.href = path.concat([element.href]).join("/");</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered">                this.manifest[manifest.item[i]['@'].id] = element;</span>
+&nbsp;
+            }
+        }
+    }
+};
+&nbsp;
+/**
+ *  EPub#parseSpine() -&gt; undefined
+ *
+ *  Parses "spine" block (all html elements that are shown to the reader)
+ **/
+EPub.prototype.parseSpine = <span class="fstat-no" title="function not covered">function (spine) {</span>
+<span class="cstat-no" title="statement not covered">    var i, len, path = this.rootFile.split("/"), element;</span>
+<span class="cstat-no" title="statement not covered">    path.pop();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (spine['@'] &amp;&amp; spine['@'].toc) {</span>
+<span class="cstat-no" title="statement not covered">        this.spine.toc = this.manifest[spine['@'].toc] || false;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (spine.itemref) {</span>
+<span class="cstat-no" title="statement not covered">        if(!Array.isArray(spine.itemref)){</span>
+<span class="cstat-no" title="statement not covered">            spine.itemref = [spine.itemref];</span>
+        }
+<span class="cstat-no" title="statement not covered">        for (i = 0, len = spine.itemref.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">            if (spine.itemref[i]['@']) {</span>
+<span class="cstat-no" title="statement not covered">                if (element = this.manifest[spine.itemref[i]['@'].idref]) {</span>
+<span class="cstat-no" title="statement not covered">                    this.spine.contents.push(element);</span>
+                }
+            }
+        }
+    }
+<span class="cstat-no" title="statement not covered">    this.flow = this.spine.contents;</span>
+};
+&nbsp;
+/**
+ *  EPub#parseTOC() -&gt; undefined
+ *
+ *  Parses ncx file for table of contents (title, html file)
+ **/
+EPub.prototype.parseTOC = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">    var i, len, path = this.spine.toc.href.split("/"), id_list = {}, keys;</span>
+<span class="cstat-no" title="statement not covered">    path.pop();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    keys = Object.keys(this.manifest);</span>
+<span class="cstat-no" title="statement not covered">    for (i = 0, len = keys.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">        id_list[this.manifest[keys[i]].href] = keys[i];</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    this.zip.readFile(this.spine.toc.href, (<span class="fstat-no" title="function not covered">function (err, data) {</span></span>
+<span class="cstat-no" title="statement not covered">        if (err) {</span>
+<span class="cstat-no" title="statement not covered">            this.emit("error", new Error("Reading archive failed"));</span>
+<span class="cstat-no" title="statement not covered">            return;</span>
+        }
+<span class="cstat-no" title="statement not covered">        var xml = data.toString("utf-8"),</span>
+            xmlparser = new XML2JS();
+&nbsp;
+<span class="cstat-no" title="statement not covered">        xmlparser.on("end", (<span class="fstat-no" title="function not covered">function (result) {</span></span>
+<span class="cstat-no" title="statement not covered">            if (result.navMap &amp;&amp; result.navMap.navPoint) {</span>
+<span class="cstat-no" title="statement not covered">                this.toc = this.walkNavMap(result.navMap.navPoint, path, id_list);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered">            this.emit("end");</span>
+        }).bind(this));
+&nbsp;
+<span class="cstat-no" title="statement not covered">        xmlparser.on("error", (<span class="fstat-no" title="function not covered">function (err) {</span></span>
+<span class="cstat-no" title="statement not covered">            this.emit("error", new Error("Parsing container XML failed"));</span>
+<span class="cstat-no" title="statement not covered">            return;</span>
+        }).bind(this));
+&nbsp;
+<span class="cstat-no" title="statement not covered">        xmlparser.parseString(xml);</span>
+&nbsp;
+    }).bind(this));
+};
+&nbsp;
+/**
+ *  EPub#walkNavMap(branch, path, id_list,[, level]) -&gt; Array
+ *  - branch (Array | Object): NCX NavPoint object
+ *  - path (Array): Base path
+ *  - id_list (Object): map of file paths and id values
+ *  - level (Number): deepness
+ *
+ *  Walks the NavMap object through all levels and finds elements
+ *  for TOC
+ **/
+EPub.prototype.walkNavMap = <span class="fstat-no" title="function not covered">function (branch, path, id_list, level) {</span>
+<span class="cstat-no" title="statement not covered">    level = level || 0;</span>
+&nbsp;
+    // don't go too far
+<span class="cstat-no" title="statement not covered">    if (level &gt; 7) {</span>
+<span class="cstat-no" title="statement not covered">        return [];</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var i, len, output = [], element, title, order, href;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (!Array.isArray(branch)) {</span>
+<span class="cstat-no" title="statement not covered">        branch = [branch];</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    for (i = 0, len = branch.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">        if (branch[i].navLabel) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            title = (branch[i].navLabel &amp;&amp; branch[i].navLabel.text || branch[i].navLabel || "").trim();</span>
+<span class="cstat-no" title="statement not covered">            order = Number(branch[i]["@"] &amp;&amp; branch[i]["@"].playOrder || 0);</span>
+<span class="cstat-no" title="statement not covered">            href = (branch[i].content &amp;&amp; branch[i].content["@"] &amp;&amp; branch[i].content["@"].src || "").trim();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            element = {</span>
+                level: level,
+                order: order,
+                title: title
+            };
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (href) {</span>
+<span class="cstat-no" title="statement not covered">                href = path.concat([href]).join("/");</span>
+<span class="cstat-no" title="statement not covered">                element.href = href;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">                if (id_list[element.href]) {</span>
+                    // link existing object
+<span class="cstat-no" title="statement not covered">                    element = this.manifest[id_list[element.href]];</span>
+<span class="cstat-no" title="statement not covered">                    element.title = title;</span>
+<span class="cstat-no" title="statement not covered">                    element.order = order;</span>
+<span class="cstat-no" title="statement not covered">                    element.level = level;</span>
+                } else {
+                    // use new one
+<span class="cstat-no" title="statement not covered">                    element.href = href;</span>
+<span class="cstat-no" title="statement not covered">                    element.id =  (branch[i]["@"] &amp;&amp; branch[i]["@"].id || "").trim();</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered">                output.push(element);</span>
+            }
+        }
+<span class="cstat-no" title="statement not covered">        if (branch[i].navPoint) {</span>
+<span class="cstat-no" title="statement not covered">            output = output.concat(this.walkNavMap(branch[i].navPoint, path, id_list, level + 1));</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered">    return output;</span>
+};
+&nbsp;
+/**
+ *  EPub#getChapter(id, callback) -&gt; undefined
+ *  - id (String): Manifest id value for a chapter
+ *  - callback (Function): callback function
+ *
+ *  Finds a chapter text for an id. Replaces image and link URL's, removes
+ *  &lt;head&gt; etc. elements. Return only chapters with mime type application/xhtml+xml
+ **/
+EPub.prototype.getChapter = <span class="fstat-no" title="function not covered">function (id, callback) {</span>
+<span class="cstat-no" title="statement not covered">    this.getChapterRaw(id, (<span class="fstat-no" title="function not covered">function (err, str) {</span></span>
+<span class="cstat-no" title="statement not covered">        if (err) {</span>
+<span class="cstat-no" title="statement not covered">            callback(err);</span>
+<span class="cstat-no" title="statement not covered">            return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        var i, len, path = this.rootFile.split("/"), keys = Object.keys(this.manifest);</span>
+<span class="cstat-no" title="statement not covered">        path.pop();</span>
+&nbsp;
+        // remove linebreaks (no multi line matches in JS regex!)
+<span class="cstat-no" title="statement not covered">        str = str.replace(/\r?\n/g, "\u0000");</span>
+&nbsp;
+        // keep only &lt;body&gt; contents
+<span class="cstat-no" title="statement not covered">        str.replace(/&lt;body[^&gt;]*?&gt;(.*)&lt;\/body[^&gt;]*?&gt;/i, <span class="fstat-no" title="function not covered">function (o, d) {</span></span>
+<span class="cstat-no" title="statement not covered">            str = d.trim();</span>
+        });
+&nbsp;
+        // remove &lt;script&gt; blocks if any
+<span class="cstat-no" title="statement not covered">        str = str.replace(/&lt;script[^&gt;]*?&gt;(.*?)&lt;\/script[^&gt;]*?&gt;/ig, <span class="fstat-no" title="function not covered">function (o, s) {</span></span>
+<span class="cstat-no" title="statement not covered">            return "";</span>
+        });
+&nbsp;
+        // remove &lt;style&gt; blocks if any
+<span class="cstat-no" title="statement not covered">        str = str.replace(/&lt;style[^&gt;]*?&gt;(.*?)&lt;\/style[^&gt;]*?&gt;/ig, <span class="fstat-no" title="function not covered">function (o, s) {</span></span>
+<span class="cstat-no" title="statement not covered">            return "";</span>
+        });
+&nbsp;
+        // remove onEvent handlers
+<span class="cstat-no" title="statement not covered">        str = str.replace(/(\s)(on\w+)(\s*=\s*["']?[^"'\s&gt;]*?["'\s&gt;])/g, <span class="fstat-no" title="function not covered">function (o, a, b, c) {</span></span>
+<span class="cstat-no" title="statement not covered">            return a + "skip-" + b + c;</span>
+        });
+&nbsp;
+        // replace images
+<span class="cstat-no" title="statement not covered">        str = str.replace(/(\ssrc\s*=\s*["']?)([^"'\s&gt;]*?)(["'\s&gt;])/g, (<span class="fstat-no" title="function not covered">function (o, a, b, c) {</span></span>
+<span class="cstat-no" title="statement not covered">            var img = path.concat([b]).join("/").trim(),</span>
+                element;
+&nbsp;
+<span class="cstat-no" title="statement not covered">            for (i = 0, len = keys.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">                if (this.manifest[keys[i]].href == img) {</span>
+<span class="cstat-no" title="statement not covered">                    element = this.manifest[keys[i]];</span>
+<span class="cstat-no" title="statement not covered">                    break;</span>
+                }
+            }
+&nbsp;
+            // include only images from manifest
+<span class="cstat-no" title="statement not covered">            if (element) {</span>
+<span class="cstat-no" title="statement not covered">                return a + this.imageroot + element.id + "/" + img + c;</span>
+            } else {
+<span class="cstat-no" title="statement not covered">                return "";</span>
+            }
+&nbsp;
+        }).bind(this));
+&nbsp;
+        // replace links
+<span class="cstat-no" title="statement not covered">        str = str.replace(/(\shref\s*=\s*["']?)([^"'\s&gt;]*?)(["'\s&gt;])/g, (<span class="fstat-no" title="function not covered">function (o, a, b, c) {</span></span>
+<span class="cstat-no" title="statement not covered">            var linkparts = b &amp;&amp; b.split("#"),</span>
+                link = path.concat([(linkparts.shift() || "")]).join("/").trim(),
+                element;
+&nbsp;
+<span class="cstat-no" title="statement not covered">            for (i = 0, len = keys.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered">                if (this.manifest[keys[i]].href.split("#")[0] == link) {</span>
+<span class="cstat-no" title="statement not covered">                    element = this.manifest[keys[i]];</span>
+<span class="cstat-no" title="statement not covered">                    break;</span>
+                }
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered">            if (linkparts.length) {</span>
+<span class="cstat-no" title="statement not covered">                link  +=  "#" + linkparts.join("#");</span>
+            }
+&nbsp;
+            // include only images from manifest
+<span class="cstat-no" title="statement not covered">            if (element) {</span>
+<span class="cstat-no" title="statement not covered">                return a + this.linkroot + element.id + "/" + link + c;</span>
+            } else {
+<span class="cstat-no" title="statement not covered">                return a + b + c;</span>
+            }
+&nbsp;
+        }).bind(this));
+&nbsp;
+        // bring back linebreaks
+<span class="cstat-no" title="statement not covered">        str = str.replace(/\u0000/g, "\n").trim();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        callback(null, str);</span>
+    }).bind(this));
+};
+&nbsp;
+&nbsp;
+/**
+ *  EPub#getChapterRaw(id, callback) -&gt; undefined
+ *  - id (String): Manifest id value for a chapter
+ *  - callback (Function): callback function
+ *
+ *  Returns the raw chapter text for an id.
+ **/
+EPub.prototype.getChapterRaw = <span class="fstat-no" title="function not covered">function (id, callback) {</span>
+<span class="cstat-no" title="statement not covered">    if (this.manifest[id]) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if (!(this.manifest[id]['media-type'] == "application/xhtml+xml" || this.manifest[id]['media-type'] == "image/svg+xml")) {</span>
+<span class="cstat-no" title="statement not covered">            return callback(new Error("Invalid mime type for chapter"));</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        this.zip.readFile(this.manifest[id].href, (<span class="fstat-no" title="function not covered">function (err, data) {</span></span>
+<span class="cstat-no" title="statement not covered">            if (err) {</span>
+<span class="cstat-no" title="statement not covered">                callback(new Error("Reading archive failed"));</span>
+<span class="cstat-no" title="statement not covered">                return;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered">            var str = data.toString("utf-8");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            callback(null, str);</span>
+&nbsp;
+        }).bind(this));
+    } else {
+<span class="cstat-no" title="statement not covered">        callback(new Error("File not found"));</span>
+    }
+};
+&nbsp;
+&nbsp;
+/**
+ *  EPub#getImage(id, callback) -&gt; undefined
+ *  - id (String): Manifest id value for an image
+ *  - callback (Function): callback function
+ *
+ *  Finds an image for an id. Returns the image as Buffer. Callback gets
+ *  an error object, image buffer and image content-type.
+ *  Return only images with mime type image
+ **/
+EPub.prototype.getImage = <span class="fstat-no" title="function not covered">function (id, callback) {</span>
+<span class="cstat-no" title="statement not covered">    if (this.manifest[id]) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if ((this.manifest[id]['media-type'] || "").toLowerCase().trim().substr(0, 6)  !=  "image/") {</span>
+<span class="cstat-no" title="statement not covered">            return callback(new Error("Invalid mime type for image"));</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        this.getFile(id, callback);</span>
+    } else {
+<span class="cstat-no" title="statement not covered">        callback(new Error("File not found"));</span>
+    }
+};
+&nbsp;
+&nbsp;
+/**
+ *  EPub#getFile(id, callback) -&gt; undefined
+ *  - id (String): Manifest id value for a file
+ *  - callback (Function): callback function
+ *
+ *  Finds a file for an id. Returns the file as Buffer. Callback gets
+ *  an error object, file contents buffer and file content-type.
+ **/
+EPub.prototype.getFile = <span class="fstat-no" title="function not covered">function (id, callback) {</span>
+<span class="cstat-no" title="statement not covered">    if (this.manifest[id]) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        this.zip.readFile(this.manifest[id].href, (<span class="fstat-no" title="function not covered">function (err, data) {</span></span>
+<span class="cstat-no" title="statement not covered">            if (err) {</span>
+<span class="cstat-no" title="statement not covered">                callback(new Error("Reading archive failed"));</span>
+<span class="cstat-no" title="statement not covered">                return;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered">            callback(null, data, this.manifest[id]['media-type']);</span>
+        }).bind(this));
+    } else {
+<span class="cstat-no" title="statement not covered">        callback(new Error("File not found"));</span>
+    }
+};
+&nbsp;
+&nbsp;
+EPub.prototype.readFile = <span class="fstat-no" title="function not covered">function(filename, options, callback_) {</span>
+<span class="cstat-no" title="statement not covered">    var callback = arguments[arguments.length - 1];</span>
+    
+<span class="cstat-no" title="statement not covered">    if (util.isFunction(options) || !options) {</span>
+<span class="cstat-no" title="statement not covered">        this.zip.readFile(filename, callback);</span>
+    } else <span class="cstat-no" title="statement not covered">if (util.isString(options)) {</span>
+        // options is an encoding
+<span class="cstat-no" title="statement not covered">        this.zip.readFile(filename, <span class="fstat-no" title="function not covered">function(err, data) {</span></span>
+<span class="cstat-no" title="statement not covered">            if (err) {</span>
+<span class="cstat-no" title="statement not covered">                callback(new Error('Reading archive failed'));</span>
+<span class="cstat-no" title="statement not covered">                return;</span>
+            }
+<span class="cstat-no" title="statement not covered">            callback(null, data.toString(options));</span>
+        });
+    } else {
+<span class="cstat-no" title="statement not covered">        throw new TypeError('Bad arguments');</span>
+    }
+};
+&nbsp;
+&nbsp;
+// Expose to the world
+module.exports = EPub;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Wed Apr 19 2017 12:35:46 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
